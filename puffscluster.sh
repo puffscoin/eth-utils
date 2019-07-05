@@ -46,8 +46,8 @@ if [ ! -f "$dir/nodes"  ]; then
     fi
 
     echo "getting enode for instance $id ($i/$N)"
-    eth="$GPUFFS --datadir $dir/data/$id --port 313$id --networkid $network_id"
-    cmd="$eth js <(echo 'console.log(admin.nodeInfo.enode); exit();') "
+    puffs="$GPUFFS --datadir $dir/data/$id --port 313$id --networkid $network_id"
+    cmd="$puffs js <(echo 'console.log(admin.nodeInfo.enode); exit();') "
     echo $cmd
     bash -c "$cmd" 2>/dev/null |grep enode | perl -pe "s/\[\:\:\]/$ip_addr/g" | perl -pe "s/^/\"/; s/\s*$/\"/;" | tee >> $dir/nodes
     if ((i<N-1)); then
