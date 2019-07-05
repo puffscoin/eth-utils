@@ -11,7 +11,7 @@ puffscoin utilities, dev tools, scripts, etc
 ### Launch an instance 
 
 ```
-GPUFFS=./gpuffs bash /path/to/puffs-utils/gethup.sh <rootdir> <dd> <run> <params>...
+GPUFFS=./gpuffs bash /path/to/puffs-utils/gpuffsup.sh <rootdir> <dd> <run> <params>...
 ```
 
 This will
@@ -21,7 +21,7 @@ This will
 - listening on port _303dd_, (like 30300, 30301, ...)
 - with the account unlocked
 - launching json-rpc server on port _81dd_ (like 8100, 8101, 8102, ...)
-- extra params are passed to `geth` 
+- extra params are passed to `gpuffs` 
 
 ```
 $ GPUFFS=./gpuffs bash ~/puffs-utils/puffsup.sh ~/tmp/puffs/ 04 09 --mine console 
@@ -52,11 +52,11 @@ This will set up a local cluster of nodes
 - the nodes log into `<root>/00.<runid>.log`, `<root>/01.<runid>.log`, ...
 - `<runid>` is just an arbitrary tag or index you can use to log multiple 
   subsequent launches of the same cluster, I recommend sequential double digit ids
-- the cluster can be killed with `killall -QUIT geth` (FIXME: should record PIDs)
-- the nodes can be restarted from the same state individually using the `gethup.sh` script
+- the cluster can be killed with `killall -QUIT gpuffs` (FIXME: should record PIDs)
+- the nodes can be restarted from the same state individually using the `gpuffsup.sh` script
 - if you want to interact with the nodes, use a json-rpc client
 - you can supply additional params on the command line which will be passed 
-  to `gethup.sh` and eventually to `geth` for each node, for instance `-vmodule=http=6 -mine -minerthreads=8` is a good one.
+  to `gpuffsup.sh` and eventually to `gpuffs` for each node, for instance `-vmodule=http=6 -mine -minerthreads=8` is a good one.
 
 ```
 GPUFFS=./gpuffs bash gpuffscluster.sh ./leagues/3301/cicada 2 3301 05 77.160.58.3 -mine 
@@ -118,7 +118,7 @@ cd puffs-utils
 bash ./netstatconfig.sh 8 cicada http://localhost:3301 kscc > ~/leagues/3301/cicada.json
 ```
 
-####Installing eth-net-intelligence-api
+####Installing puffs-net-intelligence-api
 
 ```
 git clone https://github.com/puffscoin/puffs-net-intelligence-api
