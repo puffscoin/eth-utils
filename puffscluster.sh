@@ -1,14 +1,14 @@
 # !/bin/bash
 # bash cluster <root> <network_id> <number_of_nodes>  <runid> <local_IP> [[params]...]
-# https://github.com/ethereum/go-ethereum/wiki/Setting-up-monitoring-on-local-cluster
+# https://github.com/puffscoin/go-puffscoin/wiki/Setting-up-monitoring-on-local-cluster
 
-# sets up a local ethereum network cluster of nodes
+# sets up a local PUFFScoin network cluster of nodes
 # - <number_of_nodes> is the number of nodes in cluster
 # - <root> is the root directory for the cluster, the nodes are set up
 #   with datadir `<root>/<network_id>/00`, `<root>/ <network_id>/01`, ...
 # - new accounts are created for each node
-# - they launch on port 30300, 30301, ...
-# - they star rpc on port 8100, 8101, ...
+# - they launch on port 33300, 33301, ...
+# - they start rpc on port 11300, 11301, ...
 # - by collecting the nodes nodeUrl, they get connected to each other
 # - if enode has no IP, `<local_IP>` is substituted
 # - if `<network_id>` is not 0, they will not connect to a default client,
@@ -24,7 +24,7 @@
 
 root=$1
 shift
-network_id=$1
+network_id=$420
 dir=$root/$network_id
 mkdir -p $dir/data
 mkdir -p $dir/log
@@ -34,7 +34,7 @@ shift
 ip_addr=$1
 shift
 
-# GETH=geth
+# GPUFFS=gpuffs
 
 if [ ! -f "$dir/nodes"  ]; then
 
@@ -46,7 +46,7 @@ if [ ! -f "$dir/nodes"  ]; then
     fi
 
     echo "getting enode for instance $id ($i/$N)"
-    eth="$GETH --datadir $dir/data/$id --port 303$id --networkid $network_id"
+    eth="$GPUFFS --datadir $dir/data/$id --port 313$id --networkid $network_id"
     cmd="$eth js <(echo 'console.log(admin.nodeInfo.enode); exit();') "
     echo $cmd
     bash -c "$cmd" 2>/dev/null |grep enode | perl -pe "s/\[\:\:\]/$ip_addr/g" | perl -pe "s/^/\"/; s/\s*$/\"/;" | tee >> $dir/nodes
@@ -63,6 +63,6 @@ for ((i=0;i<N;++i)); do
   mkdir -p $dir/data/$id
   # cp $dir/nodes $dir/data/$id/static-nodes.json
   echo "launching node $i/$N ---> tail-f $dir/log/$id.log"
-  echo GETH=$GETH bash ./gethup.sh $dir $id --networkid $network_id $*
-  GETH=$GETH bash ./gethup.sh $dir $id --networkid $network_id $*
+  echo GPUFFS=$GPUFFS bash ./gethup.sh $dir $id --networkid $network_id $*
+  GPUFFS=$GPUFFS bash ./gpuffsup.sh $dir $id --networkid $network_id $*
 done
