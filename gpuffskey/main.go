@@ -8,10 +8,10 @@ import (
 	"path"
 
 	"github.com/codegangsta/cli"
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/puffscoin/go-puffscoin/accounts"
+	"github.com/puffscoin/go-puffscoin/cmd/utils"
+	"github.com/puffscoin/go-puffscoin/common"
+	"github.com/puffscoin/go-puffscoin/crypto"
 	"github.com/peterh/liner"
 )
 
@@ -21,24 +21,24 @@ const (
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "gethkey"
-	app.Action = gethkey
+	app.Name = "gpuffskey"
+	app.Action = gpuffskey
 	app.HideVersion = true // we have a command to print the version
 	app.Usage = `
 
-    gethkey [-p <passwordfile>|-d <keydir>] <address> <keyfile>
+    gpuffskey [-p <passwordfile>|-d <keydir>] <address> <keyfile>
 
 Exports the given account's private key into <keyfile> using the hex encoding canonical EC
 format.
 The user is prompted for a passphrase to unlock it.
 For non-interactive use, the passphrase can be specified with the --password|-p flag:
 
-    gethkey --password <passwordfile>  <address> <keyfile>
+    gpuffskey --password <passwordfile>  <address> <keyfile>
 
-You can set an alternative key directory to use to find your ethereum encrypted keyfile.
+You can set an alternative key directory to use to find your puffscoin encrypted keyfile.
 
 Note:
-As you can directly copy your encrypted accounts to another ethereum instance,
+As you can directly copy your encrypted accounts to another puffscoin instance,
 this import/export mechanism is not needed when you transfer an account between
 nodes.
           `
@@ -113,7 +113,7 @@ func readPassword(prompt string, warnTerm bool) (string, error) {
 	return input, err
 }
 
-func gethkey(ctx *cli.Context) {
+func gpuffskey(ctx *cli.Context) {
 	account := ctx.Args().First()
 	if len(account) == 0 {
 		utils.Fatalf("account address must be given as first argument")
