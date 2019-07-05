@@ -1,7 +1,7 @@
 # !/bin/bash
 # bash intelligence <destination_app_json_path> <number_of_clusters> <name_prefix> <ws_server> <ws_secret>
 
-# sets up a puffs-net-intelligence app.json for a local ethereum network cluster of nodes
+# sets up a puffs-net-intelligence app.json for a local puffscoin network cluster of nodes
 # - <number_of_clusters> is the number of clusters
 # - <name_prefix> is a prefix for the node names as will appear in the listing
 # - <ws_server> is the puffs-netstats server
