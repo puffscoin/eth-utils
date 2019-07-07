@@ -63,6 +63,6 @@ for ((i=0;i<N;++i)); do
   mkdir -p $dir/data/$id
   # cp $dir/nodes $dir/data/$id/static-nodes.json
   echo "launching node $i/$N ---> tail-f $dir/log/$id.log"
-  echo GPUFFS=$GPUFFS bash ./gpuffsup.sh $dir $id --networkid $network_id $*
-  GPUFFS=$GPUFFS bash ./gpuffsup.sh $dir $id --networkid $network_id $*
+  echo GPUFFS=$GPUFFS bash ./puffs-utils/gpuffsup.sh $dir $id --networkid $network_id $*
+  GPUFFS=$GPUFFS bash ./puffs-utils/gpuffsup.sh $dir $id --networkid $network_id $*
 done
